@@ -40,20 +40,20 @@ function onsubmit(e) {
 
 
 
-    //for delele
-    UlList.addEventListener("click", remove_data);
-        // funtion for_delete
-     function remove_data(e){
-        // console.log(1)
-        if(e.target.classList.contains("delete")){
-                //  console.log(1) 
-            var li = e.target.parentElement;
-            UlList.removeChild(li);
-            localStorage.removeItem(NameInput.value + EmailInput.value);
+    // //for delele
+    // UlList.addEventListener("click", remove_data);
+    //     // funtion for_delete
+    //  function remove_data(e){
+    //     // console.log(1)
+    //     if(e.target.classList.contains("delete")){
+    //             //  console.log(1) 
+    //         var li = e.target.parentElement;
+    //         UlList.removeChild(li);
+    //         localStorage.removeItem(NameInput.value + EmailInput.value);
 
-        }
+    //     }
 
-     }
+    //  }
 
 
 
