@@ -1,0 +1,79 @@
+Myform = document.getElementById("Form");
+
+Myform.addEventListener("submt", onSubmit);
+
+
+
+  axios.get("https://crudcrud.com/api/36049f8442674b20837cfe713c6e2b1d/WaiterData")
+  .then((res) => {
+    for (var i = 0; i < res.data.length; i++) {
+      Display(res.data[i]);
+    }
+   })
+  .catch((err) => {
+    alert("somthing went wrong")
+   })
+
+
+function onSubmit(eve) {
+  eve.preventDefault();;
+
+  var Amount = document.getElementById("Amount");
+  var OptionTable = document.getElementById("TableOption");
+  var MenueOption = document.getElementById("menueOption");
+
+  var obj = {
+    Amount: Amount.value,
+    optionTbale: OptionTable.value,
+    Menue: MenueOption.value
+  }
+  // console.log(obj)
+
+  axios.post("https://crudcrud.com/api/36049f8442674b20837cfe713c6e2b1d/WaiterData", obj)
+    .then((respos) => {
+      Display(respos.data)
+    })
+    .catch((err) => {
+      alert("somthing went wrong")
+    })
+
+}
+
+
+function Display(obj) {
+  var UlList = document.getElementById("List");
+  var Li = document.createElement("li")
+  Li.textContent = "Amount:" + obj.Amount + "," + "Table Number:" + "," + obj.optionTbale + "Order:" + obj.Menue;
+
+
+  let userId = obj._id;
+  Li.id = userId;
+
+  var DeleteBtn = document.createElement("button");
+  DeleteBtn.textContent = "Delete";
+
+  DeleteBtn.onclick = (eve) => {
+    axios.delete(`https://crudcrud.com/api/36049f8442674b20837cfe713c6e2b1d/WaiterData/${userId}`)
+      .then((respon) => {
+        Display(userId)
+      })
+      .catch((err) => {
+        alert("somthing went Wrong")
+      })
+
+
+    Li = document.getElementById(userId)
+    UlList.removeChild(Li);
+  }
+
+
+
+  Li.appendChild(DeleteBtn);
+  UlList.appendChild(Li);
+}
+
+
+
+
+
+
